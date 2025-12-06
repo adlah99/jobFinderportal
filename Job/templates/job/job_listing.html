@@ -221,7 +221,7 @@
                                             <a href="#"><img src="{{job.job_image.url}}" alt=""></a>
                                         </div>
                                         <div class="job-tittle job-tittle2">
-                                            <a href="{% url 'jobs:jobs_details' job.id %}">
+                                            <a href="{% url 'jobs:jobs_details' job.slug %}">
                                                 <h4>{{job.title}}</h4>
                                             </a>
                                             <ul>
@@ -232,7 +232,7 @@
                                         </div>
                                     </div>
                                     <div class="items-link items-link2 f-right">
-                                        <a href="{% url 'jobs:jobs_details' job.id %}">{{job.job_type}}</a>
+                                        <a href="{% url 'jobs:jobs_details' job.slug %}">{{job.job_type}}</a>
                                         <span>{{job.Vacancy}}</span>
                                     </div>
                                 </div>

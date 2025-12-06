@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils.text import slugify
 
 # Create your models here.
 '''django model field :
@@ -35,7 +35,21 @@ class Job(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     job_type = models.CharField(max_length=15, choices=Job_type)
     job_image = models.ImageField(upload_to=image_upload )
+    slug = models.SlugField(blank=True, null=True)
+    def save(self,*args,**kwargs) :
+        self.slug = slugify(self.title)
+
+        super(Job,self).save(*args,**kwargs)
 
     def __str__(self) :
         return self.title
+class JobApplication(models.Model):
+    job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='applications')
+    name = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200)
+    resume = models.FileField(upload_to='resumes/')
+    cover_letter = models.TextField(max_length=500)
+    applied_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self) :
+        return self.name
 
